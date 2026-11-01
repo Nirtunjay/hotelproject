@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find Hotels — StayEase</title>
+  <meta name="description" content="Search and book hotels across India. Delhi, Mumbai, Jaipur, Goa, Bangalore and more." />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/chat.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏨</text></svg>" />
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">
+        <span class="navbar__logo-icon">🏨</span>StayEase
+      </a>
+      <div class="navbar__links">
+        <a href="index.html"       class="navbar__link">Home</a>
+        <a href="hotels.html"      class="navbar__link active">Hotels</a>
+        <a href="restaurants.html" class="navbar__link">Restaurants</a>
+        <a href="bookings.html"    class="navbar__link">My Bookings</a>
+      </div>
+      <a href="bookings.html" class="navbar__cta">My Bookings</a>
+      <button class="navbar__hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="navbar__mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="hotels.html">Hotels</a>
+    <a href="restaurants.html">Restaurants</a>
+    <a href="bookings.html">My Bookings</a>
+  </div>
+
+  <!-- ── Page Header ── -->
+  <div class="page-header">
+    <div class="container">
+      <h1>Find Your Perfect Hotel</h1>
+      <p>Search across 18+ premium hotels in 8 cities across India</p>
+    </div>
+  </div>
+
+  <!-- ── Search Bar ── -->
+  <div class="search-bar-wrap">
+    <div class="container">
+      <form class="search-bar" id="hotel-search-form">
+        <div class="search-bar__field">
+          <label>📍 City</label>
+          <input type="text" id="search-city" placeholder="e.g. Delhi, Mumbai, Goa…" autocomplete="off" />
+        </div>
+        <div class="search-bar__field">
+          <label>📅 Check-in</label>
+          <input type="date" id="search-checkin" />
+        </div>
+        <div class="search-bar__field">
+          <label>📅 Check-out</label>
+          <input type="date" id="search-checkout" />
+        </div>
+        <div class="search-bar__field search-bar__field--sm">
+          <label>👥 Guests</label>
+          <input type="number" id="search-guests" min="1" max="10" value="2" />
+        </div>
+        <button type="submit" class="btn btn-primary search-bar__btn">Search</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── Main Layout ── -->
+  <div class="container" style="padding-top:32px;padding-bottom:56px;">
+    <div class="search-layout">
+
+      <!-- Sidebar Filters -->
+      <aside class="filters-sidebar">
+        <div class="filters-sidebar__header">
+          <h3>Filters</h3>
+          <button class="btn btn-ghost btn-sm" id="reset-filters-btn">Reset</button>
+        </div>
+
+        <div class="filter-group">
+          <h4>City</h4>
+          <select id="filter-city" class="filter-select">
+            <option value="">All Cities</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Jaipur">Jaipur</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Goa">Goa</option>
+            <option value="Agra">Agra</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Hyderabad">Hyderabad</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <h4>Star Rating</h4>
+          <div class="star-filter">
+            <label class="filter-checkbox"><input type="checkbox" name="filter-stars" value="5" /> ★★★★★ 5 Stars</label>
+            <label class="filter-checkbox"><input type="checkbox" name="filter-stars" value="4" /> ★★★★☆ 4 Stars</label>
+            <label class="filter-checkbox"><input type="checkbox" name="filter-stars" value="3" /> ★★★☆☆ 3 Stars</label>
+            <label class="filter-checkbox"><input type="checkbox" name="filter-stars" value="2" /> ★★☆☆☆ 2 Stars</label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Max Price / Night</h4>
+          <input type="range" id="filter-price-max" min="500" max="200000" step="500" value="200000" class="price-range" />
+          <div class="price-range__label">Up to <strong id="filter-price-value">₹2,00,000</strong></div>
+        </div>
+
+        <form id="hotel-filter-form" style="display:none;"></form>
+        <button class="btn btn-primary" id="apply-filters" style="width:100%;">Apply Filters</button>
+        <button class="btn btn-ghost btn-sm" id="reset-filters-btn" style="width:100%;margin-top:8px;">Reset All</button>
+      </aside>
+
+      <!-- Results -->
+      <main class="search-results">
+        <div class="results-header">
+          <span id="result-count" class="results-count"></span>
+        </div>
+        <div id="hotel-empty-state" class="empty-state" style="display:none;">
+          <div class="empty-state__icon">🏨</div>
+          <h3 class="empty-state__title">No hotels found</h3>
+          <p class="empty-state__desc">Try a different city or adjust your filters.</p>
+        </div>
+        <div class="card-grid" id="hotels-grid">
+          <div class="loading-state" style="grid-column:1/-1;">
+            <div class="spinner spinner--lg"></div>
+            <p>Loading hotels…</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ── Hotel Detail Modal ── -->
+  <div class="modal-overlay" id="hotel-modal-overlay">
+    <div class="modal" id="hotel-modal">
+      <button class="modal__close" id="close-hotel-modal">✕</button>
+      <img class="modal__img" id="hotel-modal-img" src="" alt="" />
+      <div class="modal__body">
+        <h2 class="modal__title" id="hotel-modal-title"></h2>
+        <div id="hotel-modal-body"><!-- Filled by hotels.js --></div>
+        <hr class="modal__divider" />
+        <button class="btn btn-primary" id="confirm-book-btn" style="width:100%;margin-top:4px;">
+          Confirm Booking
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Booking Confirmation Modal ── -->
+  <div class="modal-overlay" id="confirm-modal-overlay">
+    <div class="modal modal--sm" id="confirm-modal">
+      <div id="confirm-modal-body">
+        <div class="confirm-icon">✅</div>
+        <h3>Booking Confirmed!</h3>
+        <p>Your reservation has been placed successfully.</p>
+        <div style="display:flex;gap:12px;justify-content:center;margin-top:20px;">
+          <a href="bookings.html" class="btn btn-primary">View My Bookings</a>
+          <button class="btn btn-ghost" id="close-confirm-modal">Continue Browsing</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── AI Chat Widget ── -->
+  <button id="chat-toggle-btn" aria-label="Open AI Assistant">
+    <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+    </svg>
+  </button>
+
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/hotels.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StayEase — Project Presentation & Viva Defense</title>
+  <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+  <style>
+    :root {
+      --primary: #1a6cff;
+      --primary-dark: #0f4ecc;
+      --accent: #f59e0b;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --card-bg: #f1f5f9;
+      --success: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: #0b1120;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Top control bar */
+    .top-bar {
+      width: 100%;
+      max-width: 1200px;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    button:hover {
+      background: var(--primary-dark);
+    }
+
+    button.btn-secondary {
+      background: #334155;
+    }
+
+    button.btn-secondary:hover {
+      background: #475569;
+    }
+
+    button.btn-accent {
+      background: #e11d48;
+    }
+
+    button.btn-accent:hover {
+      background: #be123c;
+    }
+
+    /* Slide container: 16:9 aspect ratio */
+    .slide-viewport {
+      width: 100%;
+      max-width: 1120px;
+      aspect-ratio: 16 / 9;
+      background: var(--surface);
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      padding: 44px 56px;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #ffffff;
+      position: relative;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    /* Slide Header */
+    .slide-header {
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .slide-header h2 {
+      font-size: 1.85rem;
+      color: var(--primary-dark);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .slide-header .tag {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Slide Body */
+    .slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Slide Footer */
+    .slide-footer {
+      border-top: 1px solid #f1f5f9;
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Grids & Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p, .card ul {
+      font-size: 0.9rem;
+      color: #334155;
+      line-height: 1.5;
+    }
+
+    .card ul {
+      padding-left: 20px;
+    }
+
+    .card ul li {
+      margin-bottom: 4px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    th, td {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+
+    th {
+      background: #f8fafc;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    tr:nth-child(even) td {
+      background: #fcfdfe;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .badge-success { background: #dcfce7; color: #15803d; }
+    .badge-warning { background: #fef3c7; color: #b45309; }
+    .badge-info { background: #e0f2fe; color: #0369a1; }
+
+    /* Architecture diagram style */
+    .diagram-box {
+      background: #1e293b;
+      color: #f8fafc;
+      padding: 16px;
+      border-radius: 8px;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.82rem;
+      line-height: 1.35;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    /* Speaker Notes Drawer */
+    .notes-drawer {
+      width: 100%;
+      max-width: 1120px;
+      background: #1e293b;
+      color: #cbd5e1;
+      padding: 16px 24px;
+      margin-top: 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .notes-title {
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Title Slide Specifics */
+    .title-slide {
+      background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #0369a1 100%);
+      color: #ffffff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .title-slide h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .title-slide h3 {
+      font-size: 1.25rem;
+      color: #93c5fd;
+      font-weight: 500;
+      margin-bottom: 30px;
+    }
+
+    .title-meta {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 20px 40px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      display: flex;
+      gap: 40px;
+      text-align: left;
+    }
+
+    .title-meta div p {
+      margin-bottom: 4px;
+      color: #e2e8f0;
+    }
+
+    .title-meta strong {
+      color: #fff;
+    }
+
+    /* Print / PDF generation styles */
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+      .top-bar, .notes-drawer {
+        display: none !important;
+      }
+      .slide-viewport {
+        max-width: none;
+        width: 100vw;
+        height: 100vh;
+        box-shadow: none;
+        border-radius: 0;
+      }
+      .slide {
+        display: flex !important;
+        page-break-after: always;
+        height: 100vh;
+        width: 100vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Action Controls -->
+  <div class="top-bar">
+    <div style="font-weight: 700; display: flex; align-items: center; gap: 8px;">
+      <span>🏨 StayEase Project Viva Presentation</span>
+      <span style="font-weight: normal; color: #94a3b8;">(13 Slides)</span>
+    </div>
+    <div class="btn-group">
+      <button class="btn-secondary" onclick="prevSlide()">◀ Prev</button>
+      <span id="slide-counter" style="font-weight: 600; min-width: 60px; text-align: center;">1 / 13</span>
+      <button class="btn-secondary" onclick="nextSlide()">Next ▶</button>
+      <button onclick="downloadPPTX()">📥 Download .PPTX</button>
+      <button class="btn-secondary" onclick="window.print()">🖨️ Export PDF</button>
+    </div>
+  </div>
+
+  <!-- Main Presentation Slides -->
+  <div class="slide-viewport">
+
+    <!-- SLIDE 1: Title Slide -->
+    <div class="slide active title-slide" data-notes="Good morning/afternoon respected examiners. Today I am presenting StayEase, an AI-powered hotel and restaurant reservation system developed using Python Flask, MongoDB, and Vanilla JavaScript.">
+      <div style="font-size: 3rem; margin-bottom: 10px;">🏨</div>
+      <h1>StayEase</h1>
+      <h3>Smart Hotel & Restaurant Reservation System with AI Assistant</h3>
+      <div class="title-meta">
+        <div>
+          <p><strong>Student Name:</strong> [Your Name]</p>
+          <p><strong>Roll / Reg. No:</strong> [Your Roll No.]</p>
+          <p><strong>Course / Dept:</strong> Computer Science & Engineering</p>
+        </div>
+        <div>
+          <p><strong>Project Guide:</strong> [Faculty Guide Name]</p>
+          <p><strong>Institution:</strong> [College / University Name]</p>
+          <p><strong>Academic Year:</strong> 2025 – 2026</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: Project Overview -->
+    <div class="slide" data-notes="StayEase bridges the gap between traditional static reservation portals and conversational modern web interfaces. It gives users a one-stop portal for both lodging and dining across 8 major Indian cities.">
+      <div class="slide-header">
+        <h2>🌐 1. Project Overview & Motivation</h2>
+        <span class="tag">Introduction</span>
+      </div>
+      <div class="slide-content">
+        <div class="grid-2">
+          <div class="card">
+            <h3>🎯 What is StayEase?</h3>
+            <p>An intelligent web-based reservation platform combining <strong>hotel bookings</strong> and <strong>restaurant table reservations</strong> into a unified modern experience.</p>
+            <br>
+            <p>Features an integrated <strong>AI Booking Assistant</strong> and autonomous agentic workflow to eliminate manual searching friction.</p>
+          </div>
+          <div class="card">
+            <h3>📍 Key Coverage & Highlights</h3>
+            <ul>
+              <li><strong>18 Top Hotels:</strong> Verified luxury to budget stays</li>
+              <li><strong>18 Restaurants:</strong> Multi-cuisine & fine dining options</li>
+              <li><strong>8 Major Cities:</strong> Delhi, Mumbai, Jaipur, Bangalore, Goa, Agra, Chennai, Hyderabad</li>
+              <li><strong>Modular REST API:</strong> High performance & decoupled architecture</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>StayEase — College Project Presentation</span>
+        <span>Slide 2 of 13</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: Problem Statement -->
+    <div class="slide" data-notes="Point out why this project is needed: users currently have to open different apps for hotels and restaurants, face cluttered UI, and fill repetitive forms with no conversational guidance.">
+      <div class="slide-header">
+        <h2>⚠️ 2. Problem Statement</h2>
+        <span class="tag">Problem Analysis</span>
+      </div>
+      <div class="slide-content">
+        <div class="grid-3">
+          <div class="card">
+            <h3>1. Fragmented Systems</h3>
+            <p>Travelers must navigate separate platforms for accommodation and dining, resulting in disjointed travel itineraries and multiple accounts.</p>
+          </div>
+          <div class="card">
+            <h3>2. Rigid Search Interfaces</h3>
+            <p>Standard platforms rely strictly on complex filters, dropdowns, and pagination, which often fail when users express natural constraints.</p>
+          </div>
+          <div class="card">
+            <h3>3. Lack of Agentic Automation</h3>
+            <p>Traditional booking engines cannot autonomously parse requests like <em>'Find a 5-star hotel in Goa under ₹8000 for 2 guests'</em> in one step.</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>StayEase — College Project Presentation</span>
+        <span>Slide 3 of 13</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: Project Objectives -->
+    <div class="slide" data-notes="State the concrete deliverables achieved in this project: Unified searching, AI conversational bot, autonomous agent worker, and persistence.">
+      <div class="slide-header">
+        <h2>🎯 3. Project Objectives</h2>
+        <span class="tag">Scope & Goals</span>
+      </div>
+      <div class="slide-content">
+        <div class="grid-2">
+          <div class="card">
+            <h3>Core Engineering Objectives</h3>
+            <ul>
+              <li>Develop a responsive, framework-free frontend for maximum speed and simplicity.</li>
+              <li>Build a modular REST API backend in Python Flask with clean Blueprint routing.</li>
+              <li>Implement room availability checking and table reservation logic with price calculation.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>AI & Automation Objectives</h3>
+            <ul>
+              <li>Design a conversational AI Assistant capable of entity extraction (City, Date, Guests, Budget).</li>
+              <li>Implement an <strong>Agentic Worker</strong> executing multi-step autonomous tasks with traceable states.</li>
+              <li>Provide flexible MongoDB storage for persistent reservation lifecycle management.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>StayEase — College Project Presentation</span>
+        <span>Slide 4 of 13</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: Technology Stack -->
+    <div class="slide" data-notes="Emphasize that we chose Vanilla JS to demonstrate solid DOM and async fetch mastery without heavy framework overhead, paired with Python Flask for lightweight REST services.">
+      <div class="slide-header">
+        <h2>💻 4. Technology Stack</h2>
+        <span class="tag">Tools & Libraries</span>
+      </div>
+      <div class="slide-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>Technologies Used</th>
+              <th>Role & Justification</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Frontend</strong></td>
+              <td>HTML5, CSS3, Vanilla JavaScript (ES6+)</td>
+              <td>Pure native web stack; no build tools required; high performance and native async fetch calls.</td>
+            </tr>
+            <tr>
+              <td><strong>Backend</strong></td>
+              <td>Python 3.10+, Flask 3.0.3</td>
+              <td>Lightweight microframework utilizing Blueprint pattern for clean routing and low latency.</td>
+            </tr>
+            <tr>
+              <td><strong>Database</strong></td>
+              <td>MongoDB, PyMongo 4.7.3</td>
+              <td>Document database for flexible booking schemas (hotel vs. restaurant attributes).</td>
+            </tr>
+            <tr>
+              <td><strong>AI / NLP Engine</strong></td>
+              <td>Regex Intent Engine & Multi-turn Session State</td>
+              <td>In-memory session state machine; LLM-ready architecture configurable via environment variables.</td>
+            </tr>
+            <tr>
+              <td><strong>Security & Utilities</strong></td>
+              <td>Flask-CORS, python-dotenv</td>
+              <td>Cross-Origin Resource Sharing handling and secure environment configuration.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="slide-footer">
+        <span>StayEase — College Project Presentation</span>
+        <span>Slide 5 of 13</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: System Architecture -->
+    <div class="slide" data-notes="Explain the 3-tier architecture: Client Browser -> Flask REST API Blueprints -> Services Layer -> In-Memory & MongoDB Persistence.">
+      <div class="slide-header">
+        <h2>🏗️ 5. System Architecture</h2>
+        <span class="tag">Design & Architecture</span>
+      </div>
+      <div class="slide-content">
+        <div class="diagram-box">
+┌───────────────────────────────────────────────────────────────────────────┐
+│                          PRESENTATION TIER (Browser)                      │
+│     index.html       hotels.html       restaurants.html     bookings.html │
+│     api.js (Fetch)   chat.js (AI UI)   main.js (DOM)        CSS Modules   │
+└─────────────────────────────────────┬─────────────────────────────────────┘
+                                      │ REST API / JSON (HTTP CORS)
+┌─────────────────────────────────────▼─────────────────────────────────────┐
+│                          APPLICATION TIER (Flask 3.0)                     │
+│  app.py (Application Factory) ───► Blueprint Dispatcher                   │
+│  ├── /api/hotels       ──► hotel_service.py      (Filtering & In-Memory DB)│
+│  ├── /api/restaurants  ──► restaurant_service.py (Geolocation & Search)   │
+│  ├── /api/bookings     ──► booking_service.py    (CRUD & Lifecycle)       │
+│  ├── /api/ai/chat      ──► ai_service.py         (Intent & Multi-Turn)    │
+│  └── /api/ai/agent     ──► agent_service.py      (Autonomous Worker)      │
+└─────────────────────────────────────┬─────────────────────────────────────┘
+                                      │ PyMongo Connector
+┌─────────────────────────────────────▼─────────────────────────────────────┐
+│                          DATA TIER (MongoDB / Cache)                      │
+│     users collection: UUID, Auth, Profile                                 │
+│     bookings collection: Hotel / Restaurant Confirmation Documents        │
+└───────────────────────────────────────────────────────────────────────────┘</div>
+      </div>
+      <div class="slide-footer">
+        <span>StayEase — College Project Presentation</span>
+        <span>Slide 6 of 13</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: Major Modules -->
+    <div class="slide" data-notes="Walk through each of the 5 Flask Blueprints. Highlight separation of concerns between routes and services.">
+      <div class="slide-header">
+        <h2>📦 6. Major System Modules</h2>
+        <span class="tag">Implementation</span>
+      </div>
+      <div class="slide-content">
+        <div class="grid-2">
+          <div class="card">
+            <h3>🏨 1. Hotel Management Module</h3>
+            <p>Handles catalog search across 8 cities with multiple filters (price bounds, star ratings, capacity). Calculates stay prices dynamically based on room type selections.</p>
+          </div>
+          <div class="card">
+            <h3>🍽️ 2. Restaurant Module</h3>
+            <p>Manages dining venues, table sizes, opening hours, and cuisine filtering. Incorporates location-based querying for nearby restaurants.</p>
+          </div>
+          <div class="card">
+            <h3>📑 3. Unified Booking Engine</h3>
+            <p>Orchestrates booking lifecycles with status tracking (<code>confirmed</code>, <code>cancelled</code>, <code>pending</code>) and unique UUID generation.</p>
+          </div>
+          <div class="card">
+            <h3>🤖 4. AI & Agent Execution Module</h3>
+            <p>Powers real-time natural language inquiries and multi-step agent execution with transparent step-by-step trace reporting.</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>StayEase — College Project Presentation</span>
+        <span>Slide 7 of 13</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: AI Chat Engine -->
+    <div class="slide" data-notes="Explain that the AI assistant uses an in-memory session store to maintain conversational context across multiple user inputs without needing third-party tokens for the viva demo.">
+      <div class="slide-header">
+        <h2>🧠 7. Conversational AI Assistant</h2>
+        <span class="tag">AI Engine</span>
+      </div>
+      <div class="slide-content">
+        <div class="grid-2">
+          <div class="card">
+            <h3>Intent Classification</h3>
+            <ul>
+              <li><strong>GREET / HELP:</strong> Conversational guidance & instructions</li>
+              <li><strong>SEARCH_HOTEL:</strong> Filters city, guest count, price & stars</li>
+              <li><strong>SEARCH_RESTAURANT:</strong> Filters dining slots & party size</li>
+              <li><strong>BOOKING_STATUS / CANCEL:</strong> Directs reservation actions</li>
+              <li><strong>NEARBY:</strong> Triggers browser geolocation queries</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Multi-Turn Session State</h3>
+            <div class="diagram-box" style="font-size: 0.78rem;">
+User: "Find a hotel for 2 guests"
+ └─► State: {guests: 2, missing: 'city'}
+     AI: "Which city are you travelling to?"
+
+User: "Mumbai"
+ └─► State: {guests: 2, city: 'Mumbai'}
+     AI: "Found 3 hotels in Mumbai..." + Quick Replies</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>StayEase — College Project Presentation</span>
+        <span>Slide 8 of 13</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 9: Agentic AI Booking Worker -->
+    <div class="slide" data-notes="Explain the Agentic Worker: It autonomously breaks complex user instructions into sequential steps, checks preconditions, verifies availability, and produces a live status trace.">
+      <div class="slide-header">
+        <h2>⚡ 8. Autonomous Agentic Booking Worker</h2>
+        <span class="tag">Autonomous Workflow</span>
+      </div>
+      <div class="slide-content">
+        <div class="card" style="margin-bottom: 14px;">
+          <p>The <strong>AgentWorker</strong> decomposes high-level instructions (e.g. <em>"Book a 5-star hotel in Jaipur for 2 guests on Nov 15"</em>) into a 7-stage plan:</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Step #</th>
+              <th>Step Name</th>
+              <th>Description & Action</th>
+              <th>Status in Trace</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><code>understand_request</code></td>
+              <td>Regex entity extractor identifies city, dates, budget, party size</td>
+              <td><span class="badge badge-success">Done</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><code>search_catalogue</code></td>
+              <td>Queries hotel / restaurant catalog with parsed criteria</td>
+              <td><span class="badge badge-success">Done</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><code>check_availability</code></td>
+              <td>Verifies real-time room / table inventory</td>
+              <td><span class="badge badge-success">Done</span></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><code>present_options</code></td>
+              <td>Ranks best matches and presents structured choices</td>
+              <td><span class="badge badge-success">Done</span></td>
+            </tr>
+            <tr>
+              <td>5 - 7</td>
+              <td><code>await & execute</code></td>
+              <td>Pauses safely for user confirmation before inserting database record</td>
+              <td><span class="badge badge-warning">Needs Input</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="slide-footer">
+        <span>StayEase — College Project Presentation</span>
+        <span>Slide 9 of 13</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 10: Database Schema -->
+    <div class="slide" data-notes="Explain MongoDB collection design. Highlight how document structures permit hotel and restaurant bookings to share the same collection cleanly without sparse relational columns.">
+      <div class="slide-header">
+        <h2>🗄️ 9. Database Schema Design (MongoDB)</h2>
+        <span class="tag">Data Model</span>
+      </div>
+      <div class="slide-content">
+        <div class="grid-2">
+          <div class="card">
+            <h3>📁 Collection: <code>users</code></h3>
+            <div class="diagram-box" style="font-size: 0.78rem;">
+{
+  "_id": ObjectId("..."),
+  "user_id": "UUID-v4-string",
+  "name": "Arjun Sharma",
+  "email": "arjun@example.com",
+  "password": "hashed_string",
+  "phone": "+91-9876543210",
+  "created_at": ISODate("...")
+}</div>
+          </div>
+          <div class="card">
+            <h3>📁 Collection: <code>bookings</code></h3>
+            <div class="diagram-box" style="font-size: 0.78rem;">
+{
+  "_id": ObjectId("..."),
+  "booking_id": "UUID-v4-string",
+  "user_id": "UUID-v4-string",
+  "booking_type": "hotel" | "restaurant",
+  "status": "confirmed" | "cancelled",
+  "hotel_id": "HTL001",
+  "checkin": "2026-11-15",
+  "checkout": "2026-11-17",
+  "room_type": "Deluxe Room",
+  "guests": 2,
+  "total_price": 37000.00
+}</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>StayEase — College Project Presentation</span>
+        <span>Slide 10 of 13</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 11: REST API Endpoints -->
+    <div class="slide" data-notes="Present the clear REST endpoints. All endpoints return standardized JSON with HTTP status codes and CORS headers.">
+      <div class="slide-header">
+        <h2>🔌 10. REST API Specification</h2>
+        <span class="tag">API Design</span>
+      </div>
+      <div class="slide-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Endpoint Route</th>
+              <th>Parameters / Payload</th>
+              <th>Functionality</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-info">GET</span></td>
+              <td><code>/api/hotels/search</code></td>
+              <td><code>city, guests, max_price, min_stars</code></td>
+              <td>Searches hotel inventory with composite filters</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-success">POST</span></td>
+              <td><code>/api/hotels/check-availability</code></td>
+              <td><code>hotel_id, checkin, checkout, room_type</code></td>
+              <td>Validates room capacity and dates</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-info">GET</span></td>
+              <td><code>/api/restaurants/nearby</code></td>
+              <td><code>lat, lng, limit</code></td>
+              <td>Calculates geographic proximity to user coordinates</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-success">POST</span></td>
+              <td><code>/api/bookings/hotel</code></td>
+              <td><code>user_id, hotel_id, dates, guests</code></td>
+              <td>Inserts confirmed hotel booking record</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-accent">DELETE</span></td>
+              <td><code>/api/bookings/&lt;id&gt;</code></td>
+              <td><code>user_id (in header / query)</code></td>
+              <td>Soft cancellation and status update</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-success">POST</span></td>
+              <td><code>/api/ai/chat</code> & <code>/agent</code></td>
+              <td><code>message, session_id / instruction</code></td>
+              <td>Processes natural language & agentic plans</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="slide-footer">
+        <span>StayEase — College Project Presentation</span>
+        <span>Slide 11 of 13</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 12: Development Progress -->
+    <div class="slide" data-notes="Be completely honest about project status. Core booking, search, UI, and AI are fully working. External paid APIs and production payment gateways are marked as planned.">
+      <div class="slide-header">
+        <h2>📊 11. Development Progress & Verification</h2>
+        <span class="tag">Current Status</span>
+      </div>
+      <div class="slide-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Module / Feature Component</th>
+              <th>Implementation State</th>
+              <th>Remarks & Verification</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hotel & Restaurant Catalog (36 venues across 8 cities)</td>
+              <td><span class="badge badge-success">Completed</span></td>
+              <td>In-memory data structures with full pricing and amenity metadata.</td>
+            </tr>
+            <tr>
+              <td>Room & Table Reservation Workflow</td>
+              <td><span class="badge badge-success">Completed</span></td>
+              <td>Form validation, date validation, and instant price tallying.</td>
+            </tr>
+            <tr>
+              <td>Conversational AI Assistant (8 Intents + State)</td>
+              <td><span class="badge badge-success">Completed</span></td>
+              <td>Integrated floating widget with quick replies and intent handling.</td>
+            </tr>
+            <tr>
+              <td>7-Step Agentic Autonomous Worker</td>
+              <td><span class="badge badge-success">Completed</span></td>
+              <td>Step-by-step trace generation with safe pause-on-input states.</td>
+            </tr>
+            <tr>
+              <td>Database Persistence (MongoDB)</td>
+              <td><span class="badge badge-success">Completed</span></td>
+              <td>Graceful fallback to mock mode if MongoDB service is stopped.</td>
+            </tr>
+            <tr>
+              <td>External Live LLM & RapidAPI Integration</td>
+              <td><span class="badge badge-warning">Planned</span></td>
+              <td>Architecture ready; activates upon entering API keys in .env.</td>
+            </tr>
+            <tr>
+              <td>Payment Gateway (Razorpay / Stripe)</td>
+              <td><span class="badge badge-warning">Future Scope</span></td>
+              <td>Simulated booking confirmation currently enabled.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="slide-footer">
+        <span>StayEase — College Project Presentation</span>
+        <span>Slide 12 of 13</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 13: Conclusion & Future Scope -->
+    <div class="slide" data-notes="Wrap up by summarizing key engineering takeaways and invite questions from the panel.">
+      <div class="slide-header">
+        <h2>🏁 12. Challenges, Future Scope & Conclusion</h2>
+        <span class="tag">Summary & Q&A</span>
+      </div>
+      <div class="slide-content">
+        <div class="grid-2">
+          <div class="card">
+            <h3>Technical Challenges Overcome</h3>
+            <ul>
+              <li><strong>Stateful NLP:</strong> Managing multi-turn intent continuation across stateless HTTP calls.</li>
+              <li><strong>Agent Transparency:</strong> Designing step-wise execution traces so users see what the agent is doing.</li>
+              <li><strong>Resilient Architecture:</strong> Ensuring the app runs in mock mode even when MongoDB is offline.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Future Roadmap & Conclusion</h3>
+            <ul>
+              <li>Integration with live payment gateway (Razorpay) and SMS/Email confirmation webhooks.</li>
+              <li>Fine-tuning with Gemini API for unstructured itinerary planning.</li>
+              <li><strong>Conclusion:</strong> StayEase delivers an efficient, full-stack, AI-augmented reservation experience built on clean modular code.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>StayEase — College Project Presentation</span>
+        <span>Slide 13 of 13</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Speaker Notes Container -->
+  <div class="notes-drawer">
+    <div class="notes-title">🎙️ Speaker Notes (What to say during Viva)</div>
+    <div id="notes-content">Loading notes...</div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const counterEl = document.getElementById('slide-counter');
+    const notesEl = document.getElementById('notes-content');
+
+    function updateSlide() {
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === currentSlide);
+      });
+      counterEl.textContent = `${currentSlide + 1} / ${totalSlides}`;
+      const activeSlide = slides[currentSlide];
+      notesEl.textContent = activeSlide.getAttribute('data-notes') || 'No notes for this slide.';
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      }
+    });
+
+    updateSlide();
+
+    // ── Generate & Download Real .pptx via pptxgenjs ──
+    function downloadPPTX() {
+      if (typeof PptxGenJS === 'undefined') {
+        alert('PptxGenJS is loading. Please check your internet connection or use Export PDF.');
+        return;
+      }
+
+      const pptx = new PptxGenJS();
+      pptx.layout = 'LAYOUT_16x9';
+      pptx.author = 'StayEase Developer';
+      pptx.company = 'StayEase Project';
+      pptx.title = 'StayEase - Smart Hotel & Restaurant Reservation System';
+
+      // Slide 1: Title
+      let s1 = pptx.addSlide();
+      s1.background = { color: '1E3A8A' };
+      s1.addText('StayEase', { x: 1, y: 1.8, w: '85%', fontSize: 44, bold: true, color: 'FFFFFF', align: 'center' });
+      s1.addText('Smart Hotel & Restaurant Reservation System with AI Assistant', { x: 1, y: 2.8, w: '85%', fontSize: 20, color: '93C5FD', align: 'center' });
+      s1.addText('College Project Presentation & Viva Defense | Academic Year 2025-2026', { x: 1, y: 5.0, w: '85%', fontSize: 13, color: 'CBD5E1', align: 'center' });
+      s1.addNotes('Good morning/afternoon respected examiners. Today I am presenting StayEase, an AI-powered hotel and restaurant reservation system developed using Python Flask, MongoDB, and Vanilla JavaScript.');
+
+      // Slide 2: Project Overview
+      let s2 = pptx.addSlide();
+      s2.addText('1. Project Overview & Motivation', { x: 0.8, y: 0.5, fontSize: 24, bold: true, color: '1A6CFF' });
+      s2.addText('• Unified Platform: Bridges accommodation and dining into a single modern portal.\n• AI Assistant: Integrated conversational agent for natural-language search and booking.\n• Extensive Inventory: 18 hotels and 18 restaurants across 8 premier Indian cities.\n• Decoupled Architecture: Independent Python Flask REST API backend with Vanilla JS frontend.', { x: 0.8, y: 1.6, w: 11.5, h: 4.5, fontSize: 16, color: '334155', bullet: true, lineSpacing: 28 });
+      s2.addNotes('StayEase bridges the gap between traditional static reservation portals and conversational modern web interfaces. It gives users a one-stop portal for both lodging and dining across 8 major Indian cities.');
+
+      // Slide 3: Problem Statement
+      let s3 = pptx.addSlide();
+      s3.addText('2. Problem Statement', { x: 0.8, y: 0.5, fontSize: 24, bold: true, color: '1A6CFF' });
+      s3.addText('1. Fragmented Booking Channels\nTravelers must switch between separate apps for hotels and restaurants, creating a disjointed planning experience.\n\n2. Cluttered & Rigid Search Interfaces\nStandard booking platforms require filling lengthy, rigid forms with no natural-language query support.\n\n3. Absence of Autonomous Agentic Execution\nExisting tools lack step-by-step task execution capable of autonomously identifying dates, budget, and party sizes.', { x: 0.8, y: 1.5, w: 11.5, h: 4.8, fontSize: 15, color: '1E293B', lineSpacing: 24 });
+      s3.addNotes('Point out why this project is needed: users currently have to open different apps for hotels and restaurants, face cluttered UI, and fill repetitive forms with no conversational guidance.');
+
+      // Slide 4: Project Objectives
+      let s4 = pptx.addSlide();
+      s4.addText('3. Project Objectives', { x: 0.8, y: 0.5, fontSize: 24, bold: true, color: '1A6CFF' });
+      s4.addText('• Build a fast, lightweight frontend using HTML5, CSS3, and Vanilla JavaScript.\n• Design a modular Python Flask backend with Blueprint routing.\n• Implement dynamic room availability and restaurant table reservation mechanics.\n• Engineer an NLP intent detection engine capable of multi-turn conversational memory.\n• Build an autonomous Agentic Worker with transparent 7-step execution traces.\n• Provide flexible MongoDB database storage with automatic mock-mode fallback.', { x: 0.8, y: 1.6, w: 11.5, h: 4.5, fontSize: 16, color: '334155', bullet: true, lineSpacing: 26 });
+      s4.addNotes('State the concrete deliverables achieved in this project: Unified searching, AI conversational bot, autonomous agent worker, and persistence.');
+
+      // Slide 5: Tech Stack
+      let s5 = pptx.addSlide();
+      s5.addText('4. Technology Stack', { x: 0.8, y: 0.5, fontSize: 24, bold: true, color: '1A6CFF' });
+      let techTable = [
+        ['Layer', 'Technology', 'Role & Description'],
+        ['Frontend', 'HTML5, CSS3, Vanilla JavaScript', 'Clean native web architecture without heavy build dependencies.'],
+        ['Backend', 'Python 3, Flask 3.0.3', 'Lightweight REST microframework utilizing Blueprint pattern.'],
+        ['Database', 'MongoDB, PyMongo 4.7.3', 'Flexible document database for varying hotel/restaurant booking schemas.'],
+        ['AI Engine', 'Rule-based Regex & State Engine', 'Zero-dependency in-process session manager; LLM-ready architecture.'],
+        ['Utilities', 'Flask-CORS, python-dotenv', 'Cross-origin communication and secure environment variable management.']
+      ];
+      s5.addTable(techTable, { x: 0.8, y: 1.5, w: 11.5, colW: [2.0, 3.5, 6.0], fontSize: 13, border: { pt: 1, color: 'E2E8F0' }, fill: 'F8FAFC' });
+      s5.addNotes('Emphasize that we chose Vanilla JS to demonstrate solid DOM and async fetch mastery without heavy framework overhead, paired with Python Flask for lightweight REST services.');
+
+      // Slide 6: System Architecture
+      let s6 = pptx.addSlide();
+      s6.addText('5. System Architecture', { x: 0.8, y: 0.5, fontSize: 24, bold: true, color: '1A6CFF' });
+      s6.addText('Client Tier (Browser: index.html, hotels.html, restaurants.html, chat.js)\n         │\n         ▼ HTTP / REST (Fetch API + JSON with CORS)\nApplication Tier (Flask 3.0 Application Factory)\n  ├── Blueprint: /api/hotels       ──► hotel_service.py\n  ├── Blueprint: /api/restaurants  ──► restaurant_service.py\n  ├── Blueprint: /api/bookings     ──► booking_service.py\n  ├── Blueprint: /api/ai/chat      ──► ai_service.py (Multi-Turn State)\n  └── Blueprint: /api/ai/agent     ──► agent_service.py (7-Step Worker)\n         │\n         ▼ PyMongo Driver\nDatabase Tier (MongoDB 27017 / hoteldb: users & bookings collections)', { x: 0.8, y: 1.5, w: 11.5, h: 4.8, fontFace: 'Courier New', fontSize: 13, color: '0F172A', fill: 'F1F5F9', margin: 10 });
+      s6.addNotes('Explain the 3-tier architecture: Client Browser -> Flask REST API Blueprints -> Services Layer -> In-Memory & MongoDB Persistence.');
+
+      // Slide 7: Major Modules
+      let s7 = pptx.addSlide();
+      s7.addText('6. Major Modules', { x: 0.8, y: 0.5, fontSize: 24, bold: true, color: '1A6CFF' });
+      s7.addText('1. Hotel Module: Multi-city search, capacity filters, room tier selection, real-time price tallying.\n2. Restaurant Module: Dining reservations, table party sizing, time slots, and GPS nearby search.\n3. Booking Lifecycle: UUID generation, status transitions (confirmed, cancelled), and user history.\n4. AI Assistant: Conversational chat widget with structured replies and actionable quick-reply buttons.\n5. Autonomous Agent: 7-stage task execution worker with live status trace feedback.', { x: 0.8, y: 1.6, w: 11.5, h: 4.5, fontSize: 16, color: '334155', lineSpacing: 26 });
+      s7.addNotes('Walk through each of the 5 Flask Blueprints. Highlight separation of concerns between routes and services.');
+
+      // Slide 8: AI Chat
+      let s8 = pptx.addSlide();
+      s8.addText('7. Conversational AI Assistant', { x: 0.8, y: 0.5, fontSize: 24, bold: true, color: '1A6CFF' });
+      s8.addText('• 8 Supported Intent Categories: GREET, HELP, SEARCH_HOTEL, SEARCH_RESTAURANT, NEARBY, BOOKING_STATUS, CANCEL, PRICING.\n• Entity Extraction Engine: Automatically parses destinations, passenger counts, calendar dates, star tiers, and budgets.\n• In-Memory Session Memory: Maintains dialogue state so users can provide information incrementally across multiple chat turns.\n• Actionable Payloads: Returns structured JSON objects containing matching hotels, photos, and direct quick-reply actions.', { x: 0.8, y: 1.6, w: 11.5, h: 4.5, fontSize: 16, color: '334155', bullet: true, lineSpacing: 26 });
+      s8.addNotes('Explain that the AI assistant uses an in-memory session store to maintain conversational context across multiple user inputs without needing third-party tokens for the viva demo.');
+
+      // Slide 9: Agentic Worker
+      let s9 = pptx.addSlide();
+      s9.addText('8. Autonomous Agentic Booking Worker', { x: 0.8, y: 0.5, fontSize: 24, bold: true, color: '1A6CFF' });
+      let agentTable = [
+        ['Step #', 'Plan Step', 'Execution Role', 'Status'],
+        ['1', 'understand_request', 'Extract city, checkin, checkout, guests, budget', 'Done'],
+        ['2', 'search_hotels', 'Search inventory with parsed criteria', 'Done'],
+        ['3', 'check_availability', 'Validate room availability for top match', 'Done'],
+        ['4', 'present_options', 'Prepare ranked hotel recommendations', 'Done'],
+        ['5', 'await_selection', 'Pause for explicit user choice', 'Needs Input'],
+        ['6', 'confirm_booking', 'Display calculated summary for confirmation', 'Pending'],
+        ['7', 'execute_booking', 'Persist booking record into database', 'Pending']
+      ];
+      s9.addTable(agentTable, { x: 0.8, y: 1.5, w: 11.5, colW: [1.2, 3.2, 5.3, 1.8], fontSize: 13, border: { pt: 1, color: 'CBD5E1' } });
+      s9.addNotes('Explain the Agentic Worker: It autonomously breaks complex user instructions into sequential steps, checks preconditions, verifies availability, and produces a live status trace.');
+
+      // Slide 10: Database
+      let s10 = pptx.addSlide();
+      s10.addText('9. Database Design (MongoDB: hoteldb)', { x: 0.8, y: 0.5, fontSize: 24, bold: true, color: '1A6CFF' });
+      s10.addText('users Collection:\n{ _id, user_id (UUID), name, email (unique), password, phone, created_at }\n\nbookings Collection:\n{ _id, booking_id (UUID), user_id, booking_type ("hotel"|"restaurant"), status ("confirmed"|"cancelled"), hotel_id, restaurant_id, checkin, checkout, date, time, room_type, guests, total_price, created_at }\n\nNote: Hotel and Restaurant catalogs are served in-memory for instant response times and offline resilience.', { x: 0.8, y: 1.5, w: 11.5, h: 4.8, fontFace: 'Courier New', fontSize: 13, color: '1E293B', fill: 'F8FAFC', margin: 10 });
+      s10.addNotes('Explain MongoDB collection design. Highlight how document structures permit hotel and restaurant bookings to share the same collection cleanly without sparse relational columns.');
+
+      // Slide 11: REST APIs
+      let s11 = pptx.addSlide();
+      s11.addText('10. REST API Specification', { x: 0.8, y: 0.5, fontSize: 24, bold: true, color: '1A6CFF' });
+      let apiTable = [
+        ['Method', 'Endpoint Route', 'Purpose'],
+        ['GET', '/api/health', 'Backend liveness and connection probe'],
+        ['GET', '/api/hotels/search', 'Search hotels by city, guests, price, and stars'],
+        ['POST', '/api/hotels/check-availability', 'Verify room availability and calculate price'],
+        ['GET', '/api/restaurants/nearby', 'Find dining spots using GPS coordinates'],
+        ['POST', '/api/bookings/hotel', 'Create a confirmed hotel reservation'],
+        ['DELETE', '/api/bookings/<id>', 'Cancel an existing user booking'],
+        ['POST', '/api/ai/chat', 'Send conversational query to AI Assistant'],
+        ['POST', '/api/ai/agent', 'Execute autonomous multi-step booking task']
+      ];
+      s11.addTable(apiTable, { x: 0.8, y: 1.4, w: 11.5, colW: [1.8, 4.2, 5.5], fontSize: 12, border: { pt: 1, color: 'E2E8F0' } });
+      s11.addNotes('Present the clear REST endpoints. All endpoints return standardized JSON with HTTP status codes and CORS headers.');
+
+      // Slide 12: Progress
+      let s12 = pptx.addSlide();
+      s12.addText('11. Development Progress & Verification', { x: 0.8, y: 0.5, fontSize: 24, bold: true, color: '1A6CFF' });
+      let progTable = [
+        ['Feature Component', 'Status', 'Implementation Detail'],
+        ['Hotel & Restaurant Inventory', 'Completed', '36 venues across 8 cities with full metadata'],
+        ['Reservation & Pricing Engine', 'Completed', 'Instant availability checking and total calculation'],
+        ['AI Assistant Chat Widget', 'Completed', '8 intents with session continuation and quick replies'],
+        ['Autonomous Agent Worker', 'Completed', '7-step plan execution with status trace output'],
+        ['MongoDB Persistence', 'Completed', 'User and reservation CRUD with mock fallback'],
+        ['Real LLM (Gemini / OpenAI)', 'Planned', 'Codebase ready; activates with API key in .env'],
+        ['Payment Gateway', 'Future Scope', 'Simulated booking confirmation active for demo']
+      ];
+      s12.addTable(progTable, { x: 0.8, y: 1.4, w: 11.5, colW: [4.0, 2.0, 5.5], fontSize: 12, border: { pt: 1, color: 'E2E8F0' } });
+      s12.addNotes('Be completely honest about project status. Core booking, search, UI, and AI are fully working. External paid APIs and production payment gateways are marked as planned.');
+
+      // Slide 13: Conclusion
+      let s13 = pptx.addSlide();
+      s13.addText('12. Challenges, Future Scope & Conclusion', { x: 0.8, y: 0.5, fontSize: 24, bold: true, color: '1A6CFF' });
+      s13.addText('Key Engineering Challenges Overcome:\n• Designing stateful conversational intelligence without third-party token dependencies.\n• Building an autonomous agent trace pipeline that transparently reports sub-task status.\n• Implementing offline-resilient architecture that functions seamlessly with or without MongoDB.\n\nFuture Scope:\n• Integrating live payment gateway (Razorpay) and automated email receipts.\n• Activating live Gemini LLM integration for open-ended travel itineraries.\n\nThank you! Questions & Answers Welcome.', { x: 0.8, y: 1.5, w: 11.5, h: 4.8, fontSize: 15, color: '1E293B', lineSpacing: 24 });
+      s13.addNotes('Wrap up by summarizing key engineering takeaways and invite questions from the panel.');
+
+      pptx.writeFile({ fileName: 'StayEase_Project_Presentation.pptx' });
+    }
+  </script>
+</body>
+</html>
