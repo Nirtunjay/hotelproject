@@ -45,7 +45,7 @@ app.get('/api/health', (_req, res) =>
 
 // ── Route stubs (populated phase by phase) ───────────────────────────────────
 // Phase 4: auth routes
-// app.use('/api/auth',              require('./routes/auth.routes'));
+app.use('/api/auth',              require('./routes/auth.routes'));
 // Phase 5: hotel + room routes
 // app.use('/api/hotels',            require('./routes/hotel.routes'));
 // Phase 7: booking routes

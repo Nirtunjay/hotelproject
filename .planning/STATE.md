@@ -7,18 +7,17 @@
 ## Current State
 
 ```
-phase:     2 (Final Architecture & Database Setup) — COMPLETE
-status:    ready_for_phase_3
+phase:     4 (Backend Auth API) — COMPLETE
+status:    ready_for_phase_5
 milestone: 1 — Core Platform
 ```
 
-**Last action:** Phase 2 completed on 2026-11-19.
-- Archived old Flask & vanilla HTML prototypes into `backend_flask_archive/` and `frontend_html_archive/`.
-- Scaffolding complete for both `backend/` (Node.js/Express) and `frontend/` (React/Vite/Tailwind v4).
-- 7 Mongoose schemas implemented with indexing and validation rules.
-- Idempotent database seed script created (`backend/scripts/seed.js`) migrating all 18 hotels & 18 restaurants, with support for `ADMIN_EMAIL` and `ADMIN_PASSWORD`.
-- Frontend compile build succeeded (`vite build` -> 0 errors).
-- Backend smoke test passed (`app-ok` on port binding).
+**Last action:** Phase 4 completed on 2026-11-19.
+- Built `src/controllers/auth.controller.js`: register, login, refresh, getMe, updateMe, changePassword, forgotPassword (stub), resetPassword (501 stub).
+- Built `src/routes/auth.routes.js`: all routes with express-validator chains.
+- Wired `/api/auth` into `src/app.js`.
+- Written `scripts/verify-auth.js`: 10-assertion integration test suite.
+- Syntax check passed cleanly on all three files.
 
 ---
 
@@ -26,20 +25,15 @@ milestone: 1 — Core Platform
 
 | Deliverable | Location | Status |
 |---|---|---|
-| Mongoose models (7) | `backend/src/models/` | ✅ Done |
-| Express App & Middleware | `backend/src/app.js`, `backend/src/middleware/` | ✅ Done |
-| Seed Script | `backend/scripts/seed.js` | ✅ Done |
-| Frontend Scaffolding | `frontend/src/` | ✅ Done |
-| React Router & Route Guards | `frontend/src/routes/` | ✅ Done |
-| Page Stubs (23 pages) | `frontend/src/pages/` | ✅ Done |
-| Brand Design Tokens | `frontend/src/index.css` | ✅ Done |
-| Environment Templates | `backend/.env.example`, `frontend/.env.example` | ✅ Done |
+| UI Component Kit | `frontend/src/components/ui/` | ✅ Done |
+| Layout Shells | `frontend/src/components/layout/` | ✅ Done |
+| Design Tokens & Theme | `frontend/src/index.css` | ✅ Done |
+| Global App Shell Integration | `frontend/src/App.jsx` | ✅ Done |
+| Auth Controller | `backend/src/controllers/auth.controller.js` | ✅ Done |
+| Auth Routes | `backend/src/routes/auth.routes.js` | ✅ Done |
+| Auth wired in app.js | `backend/src/app.js` | ✅ Done |
+| Auth Verification Script | `backend/scripts/verify-auth.js` | ✅ Done |
 
 ---
 
-## Next Step: Phase 3 · UI/UX Design System & Frontend Foundation
-
-Deliverables for Phase 3:
-1. Reusable UI components in `frontend/src/components/ui/` (`Button`, `Card`, `Badge`, `Input`, `Modal`, `Spinner`, `Select`, `Alert`).
-2. Main site layout components in `frontend/src/components/layout/` (`Navbar` with responsive mobile menu, `Footer`, `DashboardSidebar`).
-3. Wire the layout into the routing architecture so all pages inherit brand structure cleanly.
+## Next Step: Phase 5 · Backend API — Hotels, Rooms & Availability
