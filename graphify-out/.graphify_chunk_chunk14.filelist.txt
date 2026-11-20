@@ -1,0 +1,12 @@
+﻿C:\Users\Asus\Desktop\hotelproject\backend_flask_archive\requirements.txt
+C:\Users\Asus\Desktop\hotelproject\frontend\README.md
+C:\Users\Asus\Desktop\hotelproject\frontend\index.html
+C:\Users\Asus\Desktop\hotelproject\frontend_html_archive\bookings.html
+C:\Users\Asus\Desktop\hotelproject\frontend_html_archive\hotels.html
+C:\Users\Asus\Desktop\hotelproject\frontend_html_archive\index.html
+C:\Users\Asus\Desktop\hotelproject\frontend_html_archive\presentation.html
+C:\Users\Asus\Desktop\hotelproject\frontend_html_archive\restaurants.html
+C:\Users\Asus\Desktop\hotelproject\frontend\public\favicon.svg
+C:\Users\Asus\Desktop\hotelproject\frontend\public\icons.svg
+C:\Users\Asus\Desktop\hotelproject\frontend\src\assets\hero.png
+C:\Users\Asus\Desktop\hotelproject\frontend\src\assets\vite.svg
