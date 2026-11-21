@@ -1,5 +1,5 @@
-const Hotel       = require('../models/Hotel');
-const Room        = require('../models/Room');
+const Hotel = require('../models/Hotel');
+const Room = require('../models/Room');
 const HotelBooking = require('../models/HotelBooking');
 const { slugify } = require('../utils/slugify');
 const { ok, err, created } = require('../utils/apiResponse');
@@ -10,14 +10,28 @@ const { ok, err, created } = require('../utils/apiResponse');
  * Count confirmed/completed bookings overlapping [checkIn, checkOut) for a room.
  * Uses the index on { room, checkIn, checkOut }.
  */
+
 async function countOverlapping(roomId, checkIn, checkOut) {
-  return HotelBooking.countDocuments({
-    room:   roomId,
-    status: { $in: ['confirmed', 'completed'] },
-    checkIn:  { $lt: checkOut },
-    checkOut: { $gt: checkIn },
-  });
+  const result = await HotelBooking.aggregate([
+    {
+      $match: {
+        room: roomId,
+        status: { $in: ['confirmed', 'completed'] },
+        checkIn: { $lt: checkOut },
+        checkOut: { $gt: checkIn },
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        totalReserved: { $sum: '$numRooms' },
+      },
+    },
+  ]);
+
+  return result[0]?.totalReserved || 0;
 }
+
 
 // ── Public ────────────────────────────────────────────────────────────────────
 
@@ -33,7 +47,7 @@ exports.listHotels = async (req, res, next) => {
     const { city, minStars, maxPrice, amenities, page = 1, limit = 12 } = req.query;
 
     const filter = { isActive: true };
-    if (city)     filter.city = city;
+    if (city) filter.city = city;
     if (minStars) filter.starRating = { $gte: Number(minStars) };
     if (amenities) {
       const list = amenities.split(',').map(a => a.trim()).filter(Boolean);
@@ -116,7 +130,7 @@ exports.getHotel = async (req, res, next) => {
     const rooms = await Room.find({ hotel: hotel._id, isActive: true }).lean();
 
     const { checkIn, checkOut } = req.query;
-    const ciDate = checkIn  ? new Date(checkIn)  : null;
+    const ciDate = checkIn ? new Date(checkIn) : null;
     const coDate = checkOut ? new Date(checkOut) : null;
 
     // If dates supplied, attach real-time availability per room
@@ -137,7 +151,7 @@ exports.getHotel = async (req, res, next) => {
 exports.createHotel = async (req, res, next) => {
   try {
     const { name, city, address, description, starRating, amenities, images,
-            coordinates, checkInTime, checkOutTime, policies } = req.body;
+      coordinates, checkInTime, checkOutTime, policies } = req.body;
 
     if (!name || !city) return err(res, 'name and city are required', 400);
 
